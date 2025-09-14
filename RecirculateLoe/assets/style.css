@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+/* ===== Reset básico ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  text-decoration:none;
+  list-style:none;
+  font-family:"Poppins",sans-serif;
+}
+
+/* ===== Base ===== */
+:root{
+  --border:#e6e6e6;
+  --gutter:clamp(12px,3vw,24px); /* márgenes laterales fluidos */
+}
+body{ background:rgb(231,231,231); color:#111; }
+
+/* ===== Header ===== */
+.header{
+  padding:16px var(--gutter);
+  background:#fff;
+  border-bottom:1px solid #ccc;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.header h1{ font-size:2rem; }
+.header-actions .primary{
+  background:#ffd700; color:#000; border:none;
+  padding:8px 12px; border-radius:6px; cursor:pointer; font-weight:700;
+}
+.header-actions .primary:hover{ background:#e6c200; }
+
+/* ===== Main (banda blanca con separación abajo) ===== */
+.main{
+  position:relative;
+  background:#fff;
+  padding:12px var(--gutter) 24px;
+  border-bottom: 1px solid #ccc;
+}
+/* línea de corte entre el blanco del main y el gris del body */
+.main::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:0;
+  height:1px; background:var(--border);
+  pointer-events:none;
+}
+
+/* ===== Search bar ===== */
+.search-bar{
+  display:flex; gap:24px; margin:12px 0 16px;
+}
+.search-bar input{
+  flex:1; padding:8px 10px; border-radius:6px; border:1px solid #000; background:#fff;
+}
+.search-bar button{
+  padding:8px 12px; border-radius:6px; border:1px solid var(--border);
+  background:#f3f3f3; cursor:pointer;
+}
+
+/* ===== Tabla de ventas ===== */
+.ventas-table{
+  width:100%; border-collapse:collapse; background:#fff;
+}
+/* header con línea, cuerpo sin líneas */
+.ventas-table thead th{ border-bottom:1px solid var(--border); }
+.ventas-table th, .ventas-table td{
+  padding:10px; text-align:left; font-size:.9rem; vertical-align:middle;
+}
+.ventas-table th{ font-weight:600; background:#fafafa; }
+.ventas-table a{ color:#000; }
+
+/* Columna Productos: imagen + flecha en una línea y centrados verticalmente */
+.ventas-table td:nth-child(4){ white-space:nowrap; }
+.producto-img{
+  width:80px; height:80px; object-fit:cover; border-radius:6px;
+  border:1px solid var(--border); display:inline-block; vertical-align:middle; line-height:0;
+}
+.toggle-detalle{
+  background:none; border:none; cursor:pointer; font-size:22px; line-height:1;
+  padding:4px; display:inline-flex; align-items:center; justify-content:center; vertical-align:middle; height:28px;
+}
+
+/* Columna Acciones: alineada a la izquierda bajo el título y centrada verticalmente */
+.ventas-table td.acciones{
+  text-align:left; vertical-align:middle; white-space:nowrap; padding-left:10px;
+}
+.ventas-table td.acciones .accion-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  background:#fff; border-radius:10px; cursor:pointer; font-size:23px;
+  padding:10px; border:1px solid var(--border); transition:background .2s,color .2s;
+  margin:0 6px;
+}
+.ventas-table td.acciones .accion-btn:hover{ background:#646464; color:#fff; }
+
+/* Estados (chips) */
+.estado{
+  display:inline-flex; align-items:center; line-height:1;
+  padding:4px 8px; border-radius:10px; font-size:.8rem;
+}
+.estado.pago{ background:#4caf50; color:#fff; }
+.estado.envio{ background:#ff9800; color:#fff; }
+
+/* Fila detalle */
+.detalle-row{ display:none; }
+.detalle-row.visible{ display:table-row; }
+.detalle-contenido{
+  padding:10px; font-size:.9rem; border:1px solid #ddd; border-radius:6px; background:#fff;
+}
+.detalle-grid{ display:grid; grid-template-columns:150px 1fr; gap:6px 12px; }
+
+/* Footer de la tabla */
+.footer-info{ padding-top:12px; font-size:.85rem; color:#555; }
+
+/* Altura mínima de fila (para respirar junto a la imagen de 80px) */
+.ventas-table tbody tr{ min-height:96px; }
+
+/* ===== Responsive ===== */
+@media (max-width:768px){
+  .header-actions{ display:none; }
+  .ventas-table thead{ display:none; }
+  .ventas-table tr{
+    display:block; margin:12px 0; border:1px solid #ccc; border-radius:10px; padding:10px;
+  }
+  .ventas-table td{ display:block; border:none; padding:6px 0; }
+  .ventas-table td:first-child{ display:none; }
+}
+
+/* ================== FORMULARIOS (Registrar Venta / Gastos) ================== */
+/* Aplica a los forms dentro del bloque blanco .main */
+.main form#form-venta,
+.main form#form-gasto {
+  display: block;
+  max-width: 5000px;          /* ancho cómodo para campos largos */
+  margin: 0;                   /* ya tenemos padding lateral por --gutter en .main */
+}
+
+/* Grupos de campos */
+.form-group { margin-bottom: 12px; }
+.form-group label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+/* Campos */
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background: #fff;
+}
+
+/* Mensaje de error (opcional) */
+.error-msg {
+  color: #c62828;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Botón primario reutilizable */
+button.primary {
+  background: #ffd700;
+  color: #000;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+}
+button.primary:hover { background: #e6c200; }

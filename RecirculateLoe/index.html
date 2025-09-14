@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Panel de Administración</title>
+  <link rel="stylesheet" href="assets/style.css" />
+
+  <style>
+    body,html{
+      height:100%;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      background:#fafafa;
+      text-align:center;
+    }
+    header h1{font-size:40px;margin:0}
+    header p{margin:8px 0 40px 0;color:#666;font-size:16px}
+    .home-container{display:flex;gap:40px}
+    .home-btn{
+      width:200px;height:200px;border-radius:20px;border:2px solid #333;background:#fff;
+      font-size:28px;font-weight:700;display:flex;align-items:center;justify-content:center;
+      cursor:pointer;transition:all .25s;text-decoration:none;color:#111;position:relative;overflow:hidden
+    }
+    .home-btn:hover{background:#ffd84d;transform:scale(1.05)}
+    .home-btn .hover-text{position:absolute;opacity:0;transition:opacity .25s;font-size:20px;text-align:center;padding:0 10px}
+    .home-btn:hover .hover-text{opacity:1}
+    .home-btn .default-text{transition:opacity .25s}
+    .home-btn:hover .default-text{opacity:0}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Panel de Administración</h1>
+    <p>Elegí qué formulario querés gestionar</p>
+  </header>
+
+  <div class="home-container">
+    <!-- LINKS RELATIVOS (AJUSTADOS) -->
+    <a href="FormVentas/ventas.html" class="home-btn">
+      <span class="default-text">Ventas</span>
+      <span class="hover-text">Formulario de Ventas</span>
+    </a>
+    <a href="FormGastos/gastos.html" class="home-btn">
+      <span class="default-text">Gastos</span>
+      <span class="hover-text">Formulario de Gastos</span>
+    </a>
+  </div>
+</body>
+</html>

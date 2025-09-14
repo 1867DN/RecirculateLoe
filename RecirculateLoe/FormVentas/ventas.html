@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Panel de Ventas</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Ventas <span class="badge"></span></h1>
+    <div class="header-actions">
+      <a href="registrar-venta.html"><button class="primary">+ Registrar venta</button></a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="search-bar">
+      <input type="text" placeholder="Buscar" />
+      <button>⚲ Filtrar</button>
+    </div>
+
+    <table class="ventas-table">
+      <thead>
+        <tr>
+          <th>Venta</th>
+          <th>Fecha</th>
+          <th>Cliente</th>
+          <th>Productos</th>
+          <th>Total</th>
+          <th>Forma de pago</th>
+          <th>Estado del pago</th>
+          <th>Estado del envío</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><a href="#">#001</a></td>
+          <td>5 sep<br><small>19:35</small></td>
+          <td>Nicolás Hassan</td>
+
+          <!-- Productos: wrapper para centrar imagen + flecha -->
+          <td>
+            <span class="prod-wrap">
+              <img src="../assets/img/Chaqueta.jpg" alt="Chaqueta Deportiva" class="producto-img" />
+              <button type="button" class="toggle-detalle" aria-expanded="false">˄</button>
+            </span>
+          </td>
+
+          <td>$ 35.550,00</td>
+          <td>MercadoPago</td>
+          <td><span class="estado pago">✔ Recibido</span></td>
+          <td><span class="estado envio">🚚 Por enviar</span></td>
+
+          <!-- Acciones: wrapper para centrar los 3 botones -->
+          <td class="acciones">
+            <span class="acciones-wrap">
+              <button class="accion-btn" data-action="archivar" title="Archivar venta">🧾</button>
+              <button class="accion-btn" data-action="editar"   title="Editar venta">✏️</button>
+              <button class="accion-btn" data-action="borrar"   title="Borrar venta">🗑️</button>
+            </span>
+          </td>
+        </tr>
+
+        <tr class="detalle-row" style="display:none">
+          <td colspan="9">
+            <div class="detalle-contenido">
+              <div class="detalle-grid">
+                <div><strong>Nombre:</strong></div>
+                <div>Chaqueta Deportiva de Hombre</div>
+                <div><strong>Precio:</strong></div>
+                <div>$35.550,00</div>
+                <div><strong>Color:</strong></div>
+                <div>Negro</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="footer-info">Mostrando 1-1 ventas de 1</p>
+  </main>
+
+  <script src="ventas.js"></script>
+</body>
+</html>

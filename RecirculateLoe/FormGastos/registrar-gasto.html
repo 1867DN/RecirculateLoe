@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registrar Gasto</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Registrar Gasto</h1>
+    <div class="header-actions">
+      <a href="gastos.html"><button class="primary">← Volver a Gastos</button></a>
+    </div>
+  </header>
+
+  <main class="main">
+    <form id="gasto-form" novalidate>
+      <!-- Proveedor -->
+      <div class="form-group">
+        <label for="proveedor">Proveedor</label>
+        <input id="proveedor" required />
+        <small class="error-msg" id="e-proveedor"></small>
+      </div>
+
+      <!-- Concepto -->
+      <div class="form-group">
+        <label for="concepto">Concepto</label>
+        <input id="concepto" required />
+        <small class="error-msg" id="e-concepto"></small>
+      </div>
+
+      <!-- Fecha -->
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input id="fecha" type="date" required />
+        <small class="error-msg" id="e-fecha"></small>
+      </div>
+
+      <!-- Método de pago -->
+      <div class="form-group">
+        <label for="metodo">Método de pago</label>
+        <select id="metodo" required>
+          <option value="">Seleccionar…</option>
+          <option>Efectivo</option>
+          <option>Transferencia</option>
+          <option>MercadoPago</option>
+          <option>Tarjeta</option>
+        </select>
+        <small class="error-msg" id="e-metodo"></small>
+      </div>
+
+      <!-- Estado -->
+      <div class="form-group">
+        <label for="estado">Estado</label>
+        <select id="estado" required>
+          <option value="">Seleccionar…</option>
+          <option>Pagado</option>
+          <option>Pendiente</option>
+        </select>
+        <small class="error-msg" id="e-estado"></small>
+      </div>
+
+      <!-- Categoría -->
+      <div class="form-group">
+        <label for="categoria">Categoría</label>
+        <select id="categoria">
+          <option value="">Seleccionar…</option>
+          <option>Materia prima</option>
+          <option>Logística</option>
+          <option>Servicios</option>
+          <option>Otros</option>
+        </select>
+      </div>
+
+      <!-- Centro de costos -->
+      <div class="form-group">
+        <label for="centro">Centro de costos</label>
+        <select id="centro">
+          <option value="">Seleccionar…</option>
+          <option>Producción</option>
+          <option>Distribución</option>
+          <option>Marketing</option>
+          <option>Local</option>
+        </select>
+      </div>
+
+      <!-- Comprobante -->
+      <div class="form-group">
+        <label>Comprobante</label>
+        <div style="display:flex; gap:8px;">
+          <select id="comp-tipo" style="min-width:180px;">
+            <option value="">—</option>
+            <option>Factura A</option>
+            <option>Factura B</option>
+            <option>Factura C</option>
+            <option>Recibo</option>
+          </select>
+          <input id="comp-nro" placeholder="0001-00001234" />
+        </div>
+      </div>
+
+      <!-- Ítems -->
+      <div class="form-group">
+        <label>Ítems del gasto</label>
+        <div id="items-wrap"></div>
+        <button class="primary" id="add-item" type="button" style="margin-top:8px;">+ Agregar ítem</button>
+        <small class="error-msg" id="e-items"></small>
+      </div>
+
+      <!-- IVA y total preview -->
+      <div class="form-group">
+        <label for="iva">IVA %</label>
+        <input id="iva" type="number" step="0.01" min="0" value="21" />
+      </div>
+
+      <div class="form-group">
+        <label for="importe-simple">Importe simple (si no hay ítems)</label>
+        <input id="importe-simple" type="number" step="0.01" min="0" value="0" />
+      </div>
+
+      <div class="form-group">
+        <label for="total-preview">Total (preview)</label>
+        <input id="total-preview" readonly />
+      </div>
+
+      <button type="submit" class="primary">Registrar gasto</button>
+      <small class="error-msg" id="e-global" style="display:block;margin-top:8px;"></small>
+    </form>
+  </main>
+
+  <script src="registrar-gasto.js"></script>
+</body>
+</html>

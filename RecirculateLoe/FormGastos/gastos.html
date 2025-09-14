@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gastos</title>
+  <link rel="stylesheet" href="../assets/style.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>Gastos</h1>
+    <div class="header-actions">
+      <a href="registrar-gasto.html"><button class="primary">+ Registrar gasto</button></a>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="search-bar">
+      <input id="buscar-gastos" type="text" placeholder="Buscar" />
+      <button>⚲ Filtrar</button>
+    </div>
+
+    <table class="ventas-table">
+      <thead>
+        <tr>
+          <th>Gasto</th>
+          <th>Fecha</th>
+          <th>Proveedor</th>
+          <th>Concepto</th>
+          <th>Monto</th>
+          <th>Método de pago</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="gastos-body"></tbody>
+    </table>
+
+    <div class="footer-info">
+      <div id="gastos-total">Total importe: $ 0,00</div>
+      <div id="gastos-count">Mostrando 0-0 gastos de 0</div>
+    </div>
+  </main>
+
+  <script src="gastos.js"></script>
+</body>
+</html>
