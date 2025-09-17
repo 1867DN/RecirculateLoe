@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formularios Responsivos</title>
+  <style>
+    /*Estilo*/
+    body {
+      font-family: Arial, sans-serif;
+      background-color: hsl(240, 29%, 97%);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: grid;
+      gap: 20px;
+      max-width: 800px;
+      width: 90%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input, select, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    button {
+      padding: 12px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background: #005fa3;
+    }
+
+    /*Mensajes de error y confirmación*/
+    .error {
+      color: #d9534f;
+      font-size: 0.9rem;
+      display: none; /*No se muestra por default*/
+    }
+
+    .success {
+      color: #28a745;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /*responsividad*/
+    @media (min-width: 600px) {
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      form button {
+        grid-column: span 2; /* botón ocupa todo el ancho */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- formulario de contacto -->
+    <h2>Formulario de Contacto</h2>
+    <form aria-label="Formulario de contacto" id="contactForm">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" placeholder="Ingresa tu nombre" aria-required="true">
+        <div class="error" id="nombreError">Este campo es obligatorio</div>
+      </div>
+
+      <div>
+        <label for="email">Correo</label>
+        <input type="email" id="email" placeholder="ejemplo@email.com" aria-required="true">
+        <div class="error" id="emailError">Ingrese un correo válido</div>
+      </div>
+
+      <div style="grid-column: span 2;">
+        <label for="mensaje">Mensaje</label>
+        <textarea id="mensaje" placeholder="Escribe tu mensaje aquí..." aria-required="true"></textarea>
+        <div class="error" id="mensajeError">Este campo es obligatorio</div>
+      </div>
+
+      <button type="submit">Enviar</button>
+      <div class="success" id="formSuccess">Gracias por tu mensaje! Pronto nos pondremos en contacto contigo</div>
+    </form>
+
+  </div>
+
+  <script>
+    // validación de elementos
+    const form = document.getElementById('contactForm');
+    const nombre = document.getElementById('nombre');
+    const email = document.getElementById('email');
+    const mensaje = document.getElementById('mensaje');
+
+    const nombreError = document.getElementById('nombreError');
+    const emailError = document.getElementById('emailError');
+    const mensajeError = document.getElementById('mensajeError');
+    const formSuccess = document.getElementById('formSuccess');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let valid = true;
+
+      // Validar nombre
+      if (nombre.value.trim() === "") {
+        nombreError.style.display = "block";
+        valid = false;
+      } else {
+        nombreError.style.display = "none";
+      }
+
+      // Validar email
+      if (!email.value.includes("@")) {
+        emailError.style.display = "block";
+        valid = false;
+      } else {
+        emailError.style.display = "none";
+      }
+
+      // Validar mensaje
+      if (mensaje.value.trim() === "") {
+        mensajeError.style.display = "block";
+        valid = false;
+      } else {
+        mensajeError.style.display = "none";
+      }
+
+      // Si todo está bien
+      if (valid) {
+        formSuccess.style.display = "block";
+        form.reset();
+        setTimeout(() => formSuccess.style.display = "none", 3000);
+      }
+    });
+  </script>
+</body>
+</html>
+
