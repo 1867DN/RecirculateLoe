@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda de Ropa - Ventas y Gastos</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h2 { margin-top: 40px; }
+    label { display: block; margin-top: 10px; }
+    input, select { margin-bottom: 10px; }
+    .error { color: red; margin-top: 5px; }
+    .success { color: green; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Pruebas de Ventas y Gastos</h1>
+
+  <!-- Formulario de Ventas -->
+  <h2>Registrar Venta</h2>
+  <form id="formVenta">
+    <label>Cliente: <input type="text" id="cliente" required></label>
+    <label>Producto:
+      <select id="producto">
+        <option value="">--Seleccionar--</option>
+      </select>
+    </label>
+    <label>Cantidad: <input type="number" id="cantidad" min="1" required></label>
+    <label>Método de Pago:
+      <select id="metodoPago">
+        <option value="">--Seleccionar--</option>
+        <option value="Efectivo">Efectivo</option>
+        <option value="Tarjeta">Tarjeta</option>
+      </select>
+    </label>
+    <button type="submit">Guardar Venta</button>
+    <div id="errorVenta" class="error"></div>
+    <div id="successVenta" class="success"></div>
+  </form>
+
+  <!-- Formulario de Gastos -->
+  <h2>Registrar Gasto</h2>
+  <form id="formGasto">
+    <label>Proveedor: <input type="text" id="proveedor" required></label>
+    <label>Monto: <input type="number" id="monto" min="1" required></label>
+    <label>Método de Pago:
+      <select id="metodoPagoGasto">
+        <option value="">--Seleccionar--</option>
+        <option value="Efectivo">Efectivo</option>
+        <option value="Tarjeta">Tarjeta</option>
+      </select>
+    </label>
+    <button type="submit">Guardar Gasto</button>
+    <div id="errorGasto" class="error"></div>
+    <div id="successGasto" class="success"></div>
+  </form>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
