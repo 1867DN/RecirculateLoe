@@ -132,6 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   // =============================================================
 
+  // --- Guardar gasto en localStorage ---
+  function guardarGastoLocalStorage(gasto) {
+    try {
+      const data = localStorage.getItem('gastos');
+      const arr = data ? JSON.parse(data) : [];
+      arr.push(gasto);
+      localStorage.setItem('gastos', JSON.stringify(arr));
+    } catch {}
+  }
+
   // --- submit
   $form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -183,7 +193,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const arr = JSON.parse(sessionStorage.getItem(TMP_KEY) || '[]');
     arr.push(nuevo);
     sessionStorage.setItem(TMP_KEY, JSON.stringify(arr));
-
+    // Guardar también en localStorage
+    guardarGastoLocalStorage(nuevo);
     window.location.href = 'gastos.html';
   });
 

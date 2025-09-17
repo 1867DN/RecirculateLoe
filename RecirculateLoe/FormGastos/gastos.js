@@ -201,3 +201,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // primer render
   render();
 });
+
+function getPersistedGastos() {
+  try {
+    const data = localStorage.getItem('gastos');
+    const arr = data ? JSON.parse(data) : [];
+    // Asegura que todos tengan temp: true
+    return Array.isArray(arr) ? arr.map(g => ({...g, temp: true})) : [];
+  } catch {
+    return [];
+  }
+}

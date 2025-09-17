@@ -1,3 +1,44 @@
+// --- Manejo de ventas y localStorage robusto ---
+let ventas = [];
+function leerDatos(key) {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error("Error al leer localStorage:", error);
+    return [];
+  }
+}
+function guardarDatos(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error("Error al guardar en localStorage:", error);
+    alert("⚠️ No se pudo guardar la información (localStorage no disponible).");
+  }
+}
+function cargarDatos() {
+  ventas = leerDatos("ventas");
+}
+function guardarVentas() {
+  guardarDatos("ventas", ventas);
+}
+function agregarVenta(venta) {
+  ventas.push(venta);
+  guardarVentas();
+}
+
+// --- Guardar venta en localStorage ---
+function guardarVentaLocalStorage(venta) {
+  try {
+    const data = localStorage.getItem('ventas');
+    const arr = data ? JSON.parse(data) : [];
+    arr.push(venta);
+    localStorage.setItem('ventas', JSON.stringify(arr));
+  } catch {}
+}
+
+cargarDatos();
 document.addEventListener('DOMContentLoaded', () => {
   const $form = document.getElementById('form-venta');
   const $ok   = document.getElementById('mensaje-exito');
@@ -71,10 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // guardar en LS
-    const ventas = getLS('ventas', []);
-    ventas.push(venta);
-    setLS('ventas', ventas);
-    setLS('ventas_seq', seq + 1);
+    agregarVenta(venta);
 
     // feedback y reset
     $ok.style.display = 'block';

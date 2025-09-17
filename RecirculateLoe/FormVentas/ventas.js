@@ -1,3 +1,34 @@
+// --- Manejo de ventas y localStorage robusto ---
+let ventas = [];
+function leerDatos(key) {
+  try {
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error("Error al leer localStorage:", error);
+    return [];
+  }
+}
+function guardarDatos(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (error) {
+    console.error("Error al guardar en localStorage:", error);
+    alert("⚠️ No se pudo guardar la información (localStorage no disponible).");
+  }
+}
+function cargarDatos() {
+  ventas = leerDatos("ventas");
+}
+function guardarVentas() {
+  guardarDatos("ventas", ventas);
+}
+function agregarVenta(venta) {
+  ventas.push(venta);
+  guardarVentas();
+}
+
+cargarDatos();
 // ventas.js — actualiza el pie "Mostrando X-Y ventas de Z" y quita el badge del título
 document.addEventListener('DOMContentLoaded', () => {
   const tbody =
@@ -11,10 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (badge) badge.textContent = '';
 
   // ---------- Helpers LS ----------
-  const getLS = (k, fallback) => {
-    try { return JSON.parse(localStorage.getItem(k)) ?? fallback; } catch { return fallback; }
-  };
-  const setLS = (k, v) => localStorage.setItem(k, JSON.stringify(v));
+  // Helpers LS originales reemplazados por funciones globales
 
   // ---------- Render ----------
   const fmtCurrency = (n) => {
@@ -92,8 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---------- Cargar ventas desde LS (si hay) ----------
-  const ventasLS = getLS('ventas', []);
-  ventasLS.forEach(renderVenta);
+  const persisted = getPersistedVentas();
+  persisted.forEach(renderVenta);
 
   // ---------- Delegación (toggle + acciones) ----------
   tbody.addEventListener('click', (event) => {
@@ -147,9 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Remover del LS si corresponde
         if (id) {
-          const actuales = getLS('ventas', []);
-          const filtradas = actuales.filter(v => String(v.id) !== String(id));
-          setLS('ventas', filtradas);
+          ventas = ventas.filter(v => String(v.id) !== String(id));
+          guardarVentas();
         }
 
         actualizarPie();
@@ -161,3 +188,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // --------- Inicial: contar también las ventas hardcodeadas del HTML ---------
   actualizarPie();
 });
+
+function getPersistedVentas() {
+  try {
+    const data = localStorage.getItem('ventas');
+    return data ? JSON.parse(data) : [];
+  } catch {
+    return [];
+  }
+}
